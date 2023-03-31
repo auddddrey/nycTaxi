@@ -5,15 +5,10 @@ from pydantic import BaseModel
 from pyspark.ml import PipelineModel
 from pyspark.ml.feature import VectorAssembler
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType
-from spark_module import create_spark_session
-
-# spark = create_spark_session()
-# sc = spark.sparkContext
 
 # Load the pipeline model
 transform_model = os.path.join(os.getcwd(), "models", "pipelinetransformer");
 pipeline_model = PipelineModel.load(transform_model)
-
 
 # Define the schema for the input data
 schema = StructType([
@@ -53,4 +48,3 @@ def transform_data(sdf, spark):
     feature = VectorAssembler(inputCols=sdf.columns, outputCol="features")
     feature_vector = feature.transform(sdf)
     return feature_vector
-
