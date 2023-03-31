@@ -1,2 +1,2 @@
-# nycTaxi
+# nycTaxi prediction
  group project
