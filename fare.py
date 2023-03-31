@@ -14,7 +14,8 @@ pipeline_model = PipelineModel.load(transform_model)
 schema = StructType([
     StructField("pickup_zone_id", StringType(), True),
     StructField("dropoff_zone_id", StringType(), True),
-    StructField("is_weekday", IntegerType(), True),
+    # StructField("is_weekday", IntegerType(), True),
+    StructField("day_of_week", IntegerType(), True),
     StructField("hour", IntegerType(), True)
 ])
 
@@ -23,12 +24,13 @@ schema = StructType([
 class Item(BaseModel):
     pickup_zone_id: str
     dropoff_zone_id: str
-    is_weekday: int
+    #is_weekday: int
+    day_of_week: int
     hour: int
 
 
 # Define the input data columns
-INPUT_COLS = ["pickup_zone_id", "dropoff_zone_id", "is_weekday", "hour"]
+INPUT_COLS = ["pickup_zone_id", "dropoff_zone_id", "day_of_week", "hour"]
 
 
 # Define the data transformation function
@@ -37,11 +39,13 @@ def transform_data(sdf, spark):
     sdf = sdf.select(INPUT_COLS)
 
     sdf = sdf.withColumn("trip", F.concat(F.col("pickup_zone_id"), F.lit("_"), F.col("dropoff_zone_id")))
+    sdf = sdf.withColumn("is_weekday", F.when((sdf.day_of_week >= 2) & (sdf.day_of_week <= 6), 1).otherwise(0))
     sdf = sdf.drop("pickup_zone_id", "dropoff_zone_id")
 
     # Load the input data, convert the categorical columns to numeric
     cat_string_columns = ["trip"]
-    cat_columns = ["trip_index", "is_weekday", "hour"]
+    #cat_columns = ["trip_index", "is_weekday", "hour"]
+    cat_columns = ["trip_index", "is_weekday", "day_of_week", "hour"]
     sdf = pipeline_model.transform(sdf)
     sdf = sdf.drop(*(cat_string_columns + cat_columns))
 
