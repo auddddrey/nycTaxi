@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.VectorAssembler","timestamp":1679870038745,"sparkVersion":"3.3.1","uid":"VectorAssembler_7357eb22f4e2","paramMap":{"inputCols":["trip_vec","hour_vec","HrZone_vec"],"outputCol":"features"},"defaultParamMap":{"handleInvalid":"error","outputCol":"VectorAssembler_7357eb22f4e2__output"}}
