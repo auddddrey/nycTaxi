@@ -17,3 +17,7 @@
 - Zip the above two folders and upload to nycTaxi/models or email to the group members
   
 # Deploy the application on AWS EC2 instance
+- Create an EC2 instance
+- Deploy the application on the EC2 instance
+- Use NGINX as web server
+
