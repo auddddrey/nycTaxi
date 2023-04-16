@@ -1,5 +1,5 @@
 # NYC Taxi prediction
- group project
+ group project -Group 12 UWaterloo Big Data 2023
 
 # Use Fast Api to Deploy the Pyspark Model
 # What needed for create an end point?
@@ -17,7 +17,7 @@
 - Zip the above two folders and upload to nycTaxi/models or email to the group members
   
 # Deploy the application on AWS EC2 instance
-- Create an EC2 instance
+- Create an EC2 instance with Ubuntu
 - Deploy the application on the EC2 instance
 - Use NGINX as web server
 
